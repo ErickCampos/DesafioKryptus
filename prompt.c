@@ -109,6 +109,7 @@ void add(int num,int *arr){
             arr[i]=num;
             break;
         }
+    list(arr);
 }
 void get(int num,int *arr){
     if(arr[num-1] == '\0')
