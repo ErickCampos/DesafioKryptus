@@ -12,7 +12,6 @@ Description : Hello World in C, Ansi-style
 #include <stdlib.h>
 #include <string.h>
 
-
 void parse(char* command, int *arr);
 void add(int num,int *arr);
 void get(int num,int *arr);
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
 }
 
 void parse(char* command, int *arr){
-    char function[6];
+    char function[7];
     char argument[5];
     int space;
     int num;
@@ -156,12 +155,18 @@ void clear(int *arr){
 }
 
 void withdraw(int num, int *arr){
-    for(int i=num; i<100; i++){
-        if(arr[num]=='\0'){
-            arr[num-1] = '\0';
-            break;
+    if(arr[num-1]=='\0')
+        printf("Invalid index\n");
+    else{
+        printf("%d\n",arr[num-1]);
+        for(int i=num;i<100;i++){
+            if(arr[i]=='\0'){
+                arr[i-1] = '\0';
+                break;
+            }
+            arr[i-1] = arr[i];
         }
-        arr[num-1] = arr[num];
+        list(arr);
     }
 }
 
@@ -178,4 +183,6 @@ void ordain(int *arr){
         arr[j+1] = temp;
         i++;
     }
+    list(arr);
+
 }
