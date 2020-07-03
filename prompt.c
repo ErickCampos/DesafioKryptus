@@ -30,17 +30,6 @@ void clear(int *list){
 //void list(){
 
 //}
-int convertArray2Int(char *argument){
-    int i = 0;
-    int num = 0;
-    while (argument[i] != '\0'){
-        num =  (argument[i]-'0')+(num*10);
-        i++;
-    }
-    printf("%d\n",num);
-    return num;
-}
-
 void parse(char* command, int *arr){
     char function[6];
     char argument[5];
@@ -64,12 +53,14 @@ void parse(char* command, int *arr){
         printf("%s\n",function);
     }
     else{
+        int x = 0;
         for(int j=space; j<201; j++){
             if(command[j] == '\0')
                 break;
-            argument[j] = command[j];
+    
+            argument[x++] = command[j];
         }
-        num = convertArray2Int(argument);
+        sscanf(argument, "%d", &num);
         printf("%d\n",num);
     }
 }
