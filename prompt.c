@@ -16,6 +16,7 @@ Description : Hello World in C, Ansi-style
 void parse(char* command, int *arr);
 void add(int num,int *arr);
 void get(int num,int *arr);
+void list(int *arr);
 void clear(int *list);
 
 void print_entry(char *entry) {
@@ -64,7 +65,9 @@ void parse(char* command, int *arr){
         }
     }
     if(space<0){
-        printf("%s\n",function);
+        if(strncmp(function, "list",4) == 0){
+            list(arr);
+        }
     }
     else{
         int x = 0;
@@ -95,6 +98,17 @@ void add(int num,int *arr){
 }
 void get(int num,int *arr){
     printf("%d\n",arr[num-1]);
+}
+
+void list(int *arr){
+    for(int i=0; i<100;i++){
+        if(arr[i] == '\0')
+            break;
+        printf("%d ",arr[i]);
+    }
+
+    printf("\n");
+        
 }
 
 void clear(int *arr){
