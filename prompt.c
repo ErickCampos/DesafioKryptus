@@ -108,7 +108,10 @@ void add(int num,int *arr){
         }
 }
 void get(int num,int *arr){
-    printf("%d\n",arr[num-1]);
+    if(arr[num-1] == '\0')
+        printf("Invalid index\n");
+    else 
+        printf("%d\n",arr[num-1]);
 }
 
 void list(int *arr){
@@ -117,13 +120,18 @@ void list(int *arr){
             break;
         printf("%d ",arr[i]);
     }
-
-    printf("\n");
+    if(arr[0]=='\0')
+        printf("List is empty\n");
+    else
+        printf("\n");
         
 }
 
 void first(int *arr){
-    printf("%d\n", arr[0]);
+    if(arr[0]=='\0')
+        printf("There is no element in the list\n");
+    else
+        printf("%d\n", arr[0]);
 }
 void last(int *arr){
     int last = 0;
@@ -133,7 +141,10 @@ void last(int *arr){
             break;
         }
     }
-    printf("%d\n", arr[last]);
+    if(arr[0]=='\0')
+        printf("There is no element in the list\n");
+    else
+        printf("%d\n", arr[last]);
 }
 
 void clear(int *arr){
