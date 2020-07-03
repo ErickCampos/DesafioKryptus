@@ -19,7 +19,9 @@ void get(int num,int *arr);
 void list(int *arr);
 void first(int *arr);
 void last(int *arr);
-void clear(int *list);
+void clear(int *arr);
+void withdraw(int num, int *arr);
+void ordain(int *arr);
 
 void print_entry(char *entry) {
     printf("You entered: %s\n", entry);
@@ -76,6 +78,8 @@ void parse(char* command, int *arr){
             last(arr);
         else if(strncmp(function, "clear",5) == 0)
             clear(arr);
+        else if(strncmp(function, "sort",4) == 0)
+            ordain(arr);
         else
             printf("Invalid command\n");
     }
@@ -91,10 +95,10 @@ void parse(char* command, int *arr){
         sscanf(argument, "%d", &num);
         if(strncmp(function, "put",3) == 0)
             add(num, arr);
-        else if(strncmp(function, "get",3) == 0){
-            //printf("O comando foi:  %s %d\n", function, num);
+        else if(strncmp(function, "get",3) == 0)
             get(num,arr);
-        }
+        else if(strncmp(function, "remove",6) == 0)
+            withdraw(num,arr);
         else
             printf("Invalid command\n");
     }
@@ -149,4 +153,29 @@ void last(int *arr){
 
 void clear(int *arr){
     memset(arr, '\0', sizeof(arr));
+}
+
+void withdraw(int num, int *arr){
+    for(int i=num; i<100; i++){
+        if(arr[num]=='\0'){
+            arr[num-1] = '\0';
+            break;
+        }
+        arr[num-1] = arr[num];
+    }
+}
+
+void ordain(int *arr){
+    int i = 1;
+    int temp, j;
+    while(arr[i]!='\0'){
+        temp = arr[i];
+        j = i-1;
+        while((temp < arr[j]) &&( j>=0)){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1] = temp;
+        i++;
+    }
 }
