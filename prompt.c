@@ -12,24 +12,38 @@ Description : Hello World in C, Ansi-style
 #include <stdlib.h>
 #include <string.h>
 
+
+void parse(char* command, int *arr);
+void add(int num,int *arr);
+void get(int num,int *arr);
+void clear(int *list);
+
 void print_entry(char *entry) {
     printf("You entered: %s\n", entry);
 }
 
-void put(int *n){
-    printf("Oi %d\n",n[0]);
+int main(int argc, char *argv[]) {
+    char input[201];
+    int  *arr = (int *)malloc(sizeof(int)*100);
+    memset(arr, '\0', sizeof(arr));
+
+    while(1) {
+        printf("prompt> ");
+        if (fgets(input, 200, stdin) == NULL) {
+            printf("An error ocurred.\n");
+            break;
+        }
+
+        if (strncmp(input, "exit\n", 5) == 0) {
+            printf("Leaving. Good bye.\n");
+            break;
+        }
+        parse(input, arr);
+    }
+    free(arr);
+    return EXIT_SUCCESS;
 }
 
-void clear(int *list){
-    memset(list, '\0', sizeof(list));
-}
-//void get(int n){
-//
-//}   
-
-//void list(){
-
-//}
 void parse(char* command, int *arr){
     char function[6];
     char argument[5];
@@ -61,29 +75,28 @@ void parse(char* command, int *arr){
             argument[x++] = command[j];
         }
         sscanf(argument, "%d", &num);
-        printf("%d\n",num);
+        if(strncmp(function, "put",3) == 0)
+            add(num, arr);
+        else if(strncmp(function, "get",3) == 0){
+            //printf("O comando foi:  %s %d\n", function, num);
+            get(num,arr);
+        }
+        else
+            printf("Invalid command\n");
     }
 }
 
+void add(int num,int *arr){
+    for (int i=0;i<100;i++)
+        if(arr[i]=='\0'){
+            arr[i]=num;
+            break;
+        }
+}
+void get(int num,int *arr){
+    printf("%d\n",arr[num-1]);
+}
 
-int main(int argc, char *argv[]) {
-    char input[201];
-    int  *arr = (int *)malloc(sizeof(int)*100);
+void clear(int *arr){
     memset(arr, '\0', sizeof(arr));
-
-    while(1) {
-        printf("prompt> ");
-        if (fgets(input, 200, stdin) == NULL) {
-            printf("An error ocurred.\n");
-            break;
-        }
-
-        if (strncmp(input, "exit\n", 5) == 0) {
-            printf("Leaving. Good bye.\n");
-            break;
-        }
-        parse(input, arr);
-    }
-    free(arr);
-    return EXIT_SUCCESS;
 }
