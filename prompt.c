@@ -67,8 +67,8 @@ void parse(char* command, int *arr){
             break;
         }
     }
-    if(space<0){
 
+    if(space<0){
         if(strncmp(function, "list",4) == 0)
             list(arr);
         else if(strncmp(function, "first",5) == 0)  
@@ -111,6 +111,7 @@ void add(int num,int *arr){
         }
     list(arr);
 }
+
 void get(int num,int *arr){
     if(arr[num-1] == '\0')
         printf("Invalid index\n");
@@ -128,7 +129,6 @@ void list(int *arr){
         printf("List is empty\n");
     else
         printf("\n");
-        
 }
 
 void first(int *arr){
@@ -177,7 +177,7 @@ void ordain(int *arr){
     while(arr[i]!='\0'){
         temp = arr[i];
         j = i-1;
-        while((temp < arr[j]) &&( j>=0)){
+        while(temp < arr[j] && j>=0){
             arr[j+1]=arr[j];
             j--;
         }
@@ -185,5 +185,4 @@ void ordain(int *arr){
         i++;
     }
     list(arr);
-
 }
