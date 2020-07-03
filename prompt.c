@@ -17,6 +17,8 @@ void parse(char* command, int *arr);
 void add(int num,int *arr);
 void get(int num,int *arr);
 void list(int *arr);
+void first(int *arr);
+void last(int *arr);
 void clear(int *list);
 
 void print_entry(char *entry) {
@@ -65,10 +67,19 @@ void parse(char* command, int *arr){
         }
     }
     if(space<0){
-        if(strncmp(function, "list",4) == 0){
+
+        if(strncmp(function, "list",4) == 0)
             list(arr);
-        }
+        else if(strncmp(function, "first",5) == 0)  
+            first(arr);
+        else if(strncmp(function, "last",4) == 0)
+            last(arr);
+        else if(strncmp(function, "clear",5) == 0)
+            clear(arr);
+        else
+            printf("Invalid command\n");
     }
+
     else{
         int x = 0;
         for(int j=space; j<201; j++){
@@ -109,6 +120,20 @@ void list(int *arr){
 
     printf("\n");
         
+}
+
+void first(int *arr){
+    printf("%d\n", arr[0]);
+}
+void last(int *arr){
+    int last = 0;
+    for(int i=0;i<100;i++){
+        if(arr[i]=='\0'){
+            last = i-1;
+            break;
+        }
+    }
+    printf("%d\n", arr[last]);
 }
 
 void clear(int *arr){
